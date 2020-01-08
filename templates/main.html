@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" type="text/css" href=>
+        <title>Spellbook; your personal cabal.</title>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div>
+                <h4>{{user.first_name}} {{user.last_name}}'s account</h4>
+            </div>
+            <div>
+                {% with messages = get_flashed_messages() %}     
+                    {% if messages %}                            
+                        {% for message in messages %}
+                            <p>{{message}}</p>                   
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <div class="buttons">
+                <a href="/edit/{{user.id}}/info"><button>Edit Info</button></a>
+            </div>
+            <div class="buttons">
+                <a href="/spellbook/{{user.id}}/addCharacter"><button>Add Character</button></a>
+            </div>
+            <hr>
+            <table>
+                <tr>
+                    <th>Users Characters</th>                    
+                </tr>
+                {% if not spellcaster %}
+                <tr>
+                    <td>No Created Characters</td>
+                </tr>
+                {% else %}
+                    {% for character in spellcaster %}
+                    <tr>
+                        <td>
+                            {% if not character.title %}
+                                {{character.character_name}}
+                            {% else %}
+                                {{character.title}} {{character.character_name}}
+                            {% endif %}
+                        </td>
+                        <td><a href="/spellbook/check/{{character.character_id}}">Spellbook</a></td>
+                        <td><a href="/removeCharacter/{{character.user_character_id}}">Remove</a></td>
+                    </tr>
+                    {% endfor %}
+                {% endif %}
+            </table> 
+            <a class="logout" href="/logout">Logout</a>
+        </div>
+    </body>
+</html>

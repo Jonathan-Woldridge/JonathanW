@@ -1,0 +1,13 @@
+users_id
+character_id
+
+"INSERT INTO characters (character_name, title, created_at, updated_at) VALUES (%(cN)s, %(tt)s, NOW(), NOW());"
+
+"INSERT INTO characters (character_name, title, created_at, updated_at) VALUES (%(cN)s, %(tt)s, NOW(), NOW());
+INSERT INTO usercharacters (users_id, character_id) VALUES (%(did)s);"
+
+"INSERT INTO characters (character_name, title, created_at, updated_at) VALUES (%(cN)s, %(tt)s, NOW(), NOW());
+INSERT INTO usercharacters (users_id) VALUES (%(did)s);"
+
+
+INSERT INTO usercharacters (users_id, character_id) VALUES (%(did)s, 6);

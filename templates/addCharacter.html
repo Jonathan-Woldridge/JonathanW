@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Spellbook; {{user.first_name}} found a new caster.</title>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div>
+                <a class="back_to_account" href="/spellbook_character_shift">Back To Account</a>
+            </div>
+            <h2>Make a new character {{user.first_name}}</h2>
+            <div>
+                {% with messages = get_flashed_messages() %}     
+                    {% if messages %}                            
+                        {% for message in messages %}
+                            <p>{{message}}</p>                   
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <div id="edit_info">
+                <form id="edit_info_form" action="/spellbook/{{user['id']}}/addingCharacter" method="POST">
+                    <input class="inpt_field" type="text" name="title" placeholder="Title"></br>
+                    <input class="inpt_field" type="text" name="cname" placeholder="Character's Name">
+                    <input id="update_info_btn" type="submit" value="Update">
+                </form>
+            </div>
+            <a id="logout" href="/logout">Logout</a>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,28 @@
+INSERT INTO characters (id, character_name, title, created_at, updated_at) VALUES (1, 'Aramilian', 'Alchemist', NOW(), NOW());
+SELECT * FROM characters;
+
+INSERT INTO characters (character_name, title, created_at, updated_at) VALUES (%(cn)s, %(tt)s, NOW(), NOW());
+
+SELECT users.*, usercharacters.*, characters.* FROM users LEFT JOIN usercharacters ON users.id = usercharacters.users_id LEFT JOIN characters ON usercharacters.character_id = characters.id
+
+
+SELECT users.id, users.first_name, users.last_name, usercharacters.id AS user_character_id, characters.id AS character_id, characters.character_name, characters.title FROM users JOIN usercharacters ON users.id = usercharacters.users_id LEFT JOIN characters ON usercharacters.characters_id = characters.id
+
+INSERT INTO spells (id, spell_name, created_at, updated_at, spellLevel_id) VALUES (1, 'Magic Missile', NOW(), NOW(), 1);
+SELECT * FROM spells
+
+SELECT characters.id, characters.title, characters.character_name, character_spells.characters_id, spells.id AS spell_id, spells.spell_name, spell_level.id AS spell_level_id FROM characters JOIN character_spells ON characters.id = character_spells.characters_id LEFT JOIN spells ON character_spells.spells_id = spells.id LEFT JOIN spell_level ON spells.spellLevel_id = spell_level.id
+
+INSERT INTO spell_level (id, sLv, created_at, updated_at) VALUES (1, 1, NOW(), NOW());
+INSERT INTO spell_level (id, sLv, created_at, updated_at) VALUES (2, 2, NOW(), NOW());
+INSERT INTO spell_level (id, sLv, created_at, updated_at) VALUES (3, 3, NOW(), NOW());
+INSERT INTO spell_level (id, sLv, created_at, updated_at) VALUES (4, 4, NOW(), NOW());
+INSERT INTO spell_level (id, sLv, created_at, updated_at) VALUES (5, 5, NOW(), NOW());
+INSERT INTO spell_level (id, sLv, created_at, updated_at) VALUES (6, 6, NOW(), NOW());
+INSERT INTO spell_level (id, sLv, created_at, updated_at) VALUES (7, 7, NOW(), NOW());
+INSERT INTO spell_level (id, sLv, created_at, updated_at) VALUES (8, 8, NOW(), NOW());
+INSERT INTO spell_level (id, sLv, created_at, updated_at) VALUES (9, 9, NOW(), NOW());
+SELECT * FROM spell_level
+
+    mysql = connectToMySQL("Spellbook")
+    query = "DELETE FROM characters WHERE usercharacters.characters_id = %()"

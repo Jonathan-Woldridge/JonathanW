@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" type="text/css" href=>
+        <title>Spellbook; rescribe your magic.</title>
+    </head>
+    <body> 
+        <div id="wrapper">
+            <div>
+                <a class="back_to_account" href="/spellbook">Back To Account</a>
+            </div>
+            <div>
+                {% with messages = get_flashed_messages() %}     
+                    {% if messages %}                            
+                        {% for message in messages %}
+                            <p>{{message}}</p>                   
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <h2>Update Account Info</h2>
+            <div id="edit_info_form">
+                <form id="edit_info_form" action="/edit/{{user['id']}}/update" method="POST">
+                    <input id="fname" class="inpt_field" type="text" name="fname" placeholder="{{user['first_name']}}">
+                    <input id="lname" class="inpt_field" type="text" name="lname" placeholder="{{user['last_name']}}">
+                    <input id="em" class="inpt_field" type="text" name="email" placeholder="{{user['email']}}">
+                    <input id="update_info_btn" type="submit" value="Update">
+                </form>
+            </div>
+            <hr>
+            <h2>Update Password </h2>
+            <div id="signup">
+                <form id="edit_pw_form" action="/edit/{{user['id']}}/pwupdate" method="POST">
+                    <input id="old_pw" class="inpt_field" type="password" style="border: none;" name="old_pw" placeholder="Old Password">
+                    <input id="new_pw" class="inpt_field" type="password" style="border: none;" name="pw" placeholder="New Password">
+                    <input id="con_pw" class="inpt_field" type="password" style="border: none;" name="con_pw" placeholder="Confirm New Password">
+                    <input id="update_pw_btn" type="submit" value="Update">
+                </form>
+            </div>
+            <a id="bot_logout" href="/logout">Logout</a>
+        </div>
+    </body>
+</html>

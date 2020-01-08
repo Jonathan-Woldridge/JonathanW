@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Spellbook; {{caster.character_name}}</title>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div>
+                <h4>{{caster.title}} {{caster.character_name}}'s account</h4>
+                <a class="back_to_account" href="/spellbook">Back To Account</a>
+            </div>
+            <div>
+                {% with messages = get_flashed_messages() %}     
+                    {% if messages %}                            
+                        {% for message in messages %}
+                            <p>{{message}}</p>                   
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <table>
+                <tr>
+                    <th>Spell's Known</th>                    
+                </tr>
+                {% if not spellbook %}
+                <tr>
+                    <td>No spells are known.</td>
+                </tr>
+                {% else %}
+                    {% for scribed in spellbook %}
+                        <tr>
+                            <td>{{scribed.spell_name}} is a Lv{{scribed.spell_level_id}} spell.</td>
+                            <td><a href="/remove_spell/{{scribed.id}}/{{scribed.spell_id}}">Unlearn Spell</a></td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </table> 
+            <form action="/add_spell/{{caster.id}}" method="POST">
+                <select name ="add_spell_id" id="select_spell">
+                    <option selected="selected">Choose a Spell</option>      
+                    {% for spell in spells %}
+                        <option  value="{{spell['id']}}">{{spell['spell_name']}}</option>
+                    {% endfor %}
+                </select> 
+                <input id="spell_button" type="submit" value="Scribe">
+            </form>
+            <a class="logout" href="/logout">Logout</a>
+        </div>
+    </body>
+</html>
